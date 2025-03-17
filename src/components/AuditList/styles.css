@@ -1,0 +1,499 @@
+.audit-list {
+  padding: 2rem;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.new-audit-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.audit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.audit-card {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.audit-card.archived {
+  background-color: #f1f5f9;
+  border-left: 4px solid #94a3b8;
+}
+
+.audit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.audit-header h3 {
+  margin: 0;
+  color: var(--text-color);
+}
+
+.reference {
+  font-size: 0.875rem;
+  color: var(--primary-color);
+}
+
+.audit-details {
+  margin-bottom: 1rem;
+}
+
+.audit-details p {
+  margin: 0.5rem 0;
+  font-size: 0.875rem;
+}
+
+.audit-status-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: #f8fafc;
+  border-radius: 0.375rem;
+  border: 1px solid var(--border-color);
+}
+
+.status-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.status-checkbox input {
+  cursor: pointer;
+}
+
+.risk-counts {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.risk {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.risk.red {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.risk.amber {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.risk.green {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.audit-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.audit-actions button {
+  padding: 0.5rem 1rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  flex: 1;
+}
+
+.expand-btn {
+  background: #64748b !important;
+}
+
+.damage-records-preview {
+  margin-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+}
+
+.damage-records-preview h4 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.damage-record-summary {
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--border-color);
+}
+
+.damage-record-summary.red {
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+}
+
+.damage-record-summary.amber {
+  background-color: #fef3c7;
+  border-color: #fde68a;
+}
+
+.damage-record-summary.green {
+  background-color: #d1fae5;
+  border-color: #a7f3d0;
+}
+
+.damage-record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.damage-type {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.risk-badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+}
+
+.risk-badge.red {
+  background: #dc2626;
+  color: white;
+}
+
+.risk-badge.amber {
+  background: #d97706;
+  color: white;
+}
+
+.risk-badge.green {
+  background: #059669;
+  color: white;
+}
+
+.damage-record-details {
+  font-size: 0.8125rem;
+}
+
+.damage-record-details p {
+  margin: 0.25rem 0;
+}
+
+/* Search and filter styles */
+.search-filter-container {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.search-box {
+  margin-bottom: 1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.include-archived-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.include-archived-checkbox input {
+  cursor: pointer;
+}
+
+.filter-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .filter-options {
+    grid-template-columns: 1fr 1fr auto;
+    align-items: start;
+  }
+}
+
+.filter-group {
+  margin-bottom: 1rem;
+}
+
+.filter-group h3 {
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+}
+
+.filter-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.date-filters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.date-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+  min-width: 150px;
+}
+
+.date-filter label {
+  font-size: 0.875rem;
+  color: var(--text-color);
+}
+
+.date-filter input {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+}
+
+.reset-filters-btn {
+  padding: 0.75rem 1.5rem;
+  background: #64748b;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  align-self: flex-end;
+  margin-top: 1.5rem;
+}
+
+.results-summary {
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+/* Draft audits section */
+.draft-audits-section {
+  margin-bottom: 2rem;
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.draft-audits-section h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-size: 1.25rem;
+}
+
+.draft-audits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.draft-audit-card {
+  background-color: #f0f9ff;
+  border-left: 4px solid #3b82f6;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.draft-audit-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.125rem;
+  color: var(--text-color);
+}
+
+.draft-audit-info p {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+}
+
+.draft-audit-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.continue-audit-btn {
+  padding: 0.5rem 1rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.continue-audit-btn:hover {
+  background: #2563eb;
+}
+
+/* Damage photo thumbnail styles */
+.damage-record-photo {
+  margin-top: 0.75rem;
+}
+
+.thumbnail-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  overflow: hidden;
+  max-width: 100px;
+  max-height: 75px;
+}
+
+.damage-thumbnail {
+  width: 100px;
+  height: 75px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.thumbnail-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.thumbnail-overlay span {
+  color: white;
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 0.25rem;
+}
+
+.thumbnail-container:hover .thumbnail-overlay {
+  opacity: 1;
+}
+
+.thumbnail-container:hover .damage-thumbnail {
+  transform: scale(1.05);
+}
+
+/* Photo modal styles */
+.photo-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.photo-modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close-modal {
+  position: absolute;
+  top: -1.5rem;
+  right: -1.5rem;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+}
+
+.enlarged-photo {
+  display: block;
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 0.25rem;
+}

@@ -1,0 +1,252 @@
+.auditor-dashboard {
+  padding: 2rem;
+}
+
+.scoreboard {
+  margin-bottom: 3rem;
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.scoreboard table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scoreboard th,
+.scoreboard td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid var(--border-color);
+}
+
+.scoreboard th {
+  background-color: #f8fafc;
+  font-weight: 600;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 2rem;
+}
+
+.error {
+  color: #dc2626;
+}
+
+/* Styles for Next Days Audits */
+.next-days-audits {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.audits-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.audits-header h2 {
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 1.25rem;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-group label {
+  font-weight: 500;
+  color: var(--text-color);
+  white-space: nowrap;
+}
+
+.time-period-select,
+.auditor-select {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  background-color: white;
+  color: var(--text-color);
+  font-size: 0.875rem;
+  min-width: 150px;
+}
+
+.next-days-audits table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.next-days-audits th,
+.next-days-audits td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid var(--border-color);
+}
+
+.next-days-audits th {
+  background-color: #f8fafc;
+  font-weight: 600;
+}
+
+.next-days-audits td button {
+  padding: 0.5rem 1rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  width: auto;
+}
+
+/* Past Booked Audits */
+.past-booked-audits {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.past-booked-audits h2 {
+  margin: 0 0 1.5rem 0;
+  color: var(--primary-color);
+  font-size: 1.25rem;
+}
+
+.past-booked-audits table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.past-booked-audits th,
+.past-booked-audits td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid var(--border-color);
+}
+
+.past-booked-audits th {
+  background-color: #f8fafc;
+  font-weight: 600;
+}
+
+.past-audit-row {
+  background-color: #fee2e2;
+}
+
+.past-audit-row td button {
+  padding: 0.5rem 1rem;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  width: auto;
+}
+
+/* Draft audits section */
+.draft-audits-section {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.draft-audits-section h2 {
+  margin: 0 0 1.5rem 0;
+  color: var(--primary-color);
+  font-size: 1.25rem;
+}
+
+.draft-audits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.draft-audit-card {
+  background-color: #f0f9ff;
+  border-left: 4px solid #3b82f6;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.draft-audit-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.125rem;
+  color: var(--text-color);
+}
+
+.draft-audit-info p {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+}
+
+.draft-audit-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.continue-audit-btn {
+  padding: 0.5rem 1rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  width: auto;
+}
+
+.continue-audit-btn:hover {
+  background: #2563eb;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .audits-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-controls {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+
+  .time-period-select,
+  .auditor-select {
+    width: 100%;
+  }
+}
