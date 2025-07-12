@@ -205,12 +205,12 @@
   background: white;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  overflow-y: visible;
   border: 1px solid var(--border-color);
 }
 
 .printable-content {
-  padding: 2rem;
+  padding: 0;
 }
 
 .no-preview {
