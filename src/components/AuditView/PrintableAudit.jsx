@@ -7,6 +7,7 @@ import { useSettings } from '../../contexts/SettingsContext';
 import { boxedDamageRecordsTemplate } from '../QuoteTemplates/templates/boxedDamageRecordsTemplate';
 import { imageToBase64 } from '../../utils/assetPaths';
 import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType } from 'docx';
+import { saveAs } from 'file-saver';
 
 const PrintableAudit = ({ audit, damageRecords, onClose, auditorDetails }) => {
   const [templates, setTemplates] = useState([]);
@@ -343,14 +344,20 @@ const PrintableAudit = ({ audit, damageRecords, onClose, auditorDetails }) => {
 
       const blob = await Packer.toBlob(doc);
 
-      alert("Due to WebContainer limitations, automatic Word document download isn't possible.  Please use a different environment for this feature.");
+       try {
+        saveAs(blob, filename);
+      } catch (e) {
+        console.error('Download blocked or failed:', e);
+        if (navigator.userAgent.includes('WebContainer')) {
+          alert("Due to WebContainer limitations, automatic Word document download isn't possible.  Please use a different environment for this feature.");
+        }
+      }
 
     } catch (error) {
       console.error('Error exporting to Word:', error);
       alert('Failed to export to Word. Please try again.');
     }
   };
-
 
   if (loading) {
     return <div className="loading">Loading templates...</div>;
