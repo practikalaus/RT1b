@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './styles.css';
 import { supabase } from '../../supabase';
 import { processTemplate } from '../../utils/templateProcessor';
-import { generatePDF } from '../QuoteTemplates/utils/pdfGenerator';
+import { printHTMLContent } from '../../utils/printUtils';
 import { imageToBase64 } from '../../utils/assetPaths';
 
 const RepairQuoteModal = ({ audit, damageRecords, auditorDetails, onClose }) => {
@@ -162,15 +162,31 @@ const RepairQuoteModal = ({ audit, damageRecords, auditorDetails, onClose }) => 
     generateQuote();
   }, [audit, damageRecords, selectedTemplate, brandPrices, auditorDetails]);
 
-  const handleDownload = async () => {
+  const handleDownload = () => {
     if (!processedContent || !audit) return;
+    
+    let combinedStyles = '';
+    const styleSheets = document.styleSheets;
+    for (let i = 0; i < styleSheets.length; i++) {
+      try {
+        const rules = styleSheets[i].cssRules || styleSheets[i].rules;
+        if (rules) {
+          for (let j = 0; j < rules.length; j++) {
+            combinedStyles += rules[j].cssText + '\n';
+          }
+        }
+      } catch (e) {
+        if (e.name !== 'SecurityError') {
+          console.error('Error reading stylesheet:', e);
+        }
+        continue;
+      }
+    }
+
     try {
-      await generatePDF({
-        content: processedContent,
-        filename: `repair-quote-${audit.reference_number}.pdf`
-      });
+      printHTMLContent(`<style>${combinedStyles}</style>${processedContent}`, `repair-quote-${audit.reference_number}.pdf`, combinedStyles);
     } catch (error) {
-      console.error('Error downloading PDF:', error);
+      console.error('Error opening print preview:', error);
     }
   };
 
