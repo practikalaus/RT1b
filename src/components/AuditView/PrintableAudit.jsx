@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../supabase';
 import DOMPurify from 'dompurify';
-import html2pdf from 'html2pdf.js';
+import { printHTMLContent } from '../../utils/printUtils';
 import './styles.css';
 import { useSettings } from '../../contexts/SettingsContext';
 import { boxedDamageRecordsTemplate } from '../QuoteTemplates/templates/boxedDamageRecordsTemplate';
 import { imageToBase64 } from '../../utils/assetPaths';
-import { saveAs } from 'file-saver';
 import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType } from 'docx';
 
 const PrintableAudit = ({ audit, damageRecords, onClose, auditorDetails }) => {
@@ -244,39 +243,11 @@ const PrintableAudit = ({ audit, damageRecords, onClose, auditorDetails }) => {
       }
     }
   
-    // Create a new div and set its innerHTML to the processed content
-    const element = document.createElement('div');
-  
-    // Add a <style> tag with the combined CSS to the element
-    element.innerHTML = `<style>${combinedStyles}</style>${processedContent}`;
-    document.body.appendChild(element);
-  
-    const opt = {
-      margin: [15, 15],
-      filename: filename,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, logging: false },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },
-      pagebreak: { mode: 'avoid-all' }
-    };
-  
     try {
-      const pdfBlob = await html2pdf().set(opt).from(element).output('blob');
-      const url = URL.createObjectURL(pdfBlob);
-  
-      // Try opening in a new tab/window first
-      const newWindow = window.open(url, '_blank');
-      if (!newWindow) {
-        // If popup blocked, fall back to alert
-        alert("Download failed. Please check your browser settings and allow popups for this site, or try a different browser.  You may need to manually download the file.");
-      }
-      URL.revokeObjectURL(url); // Clean up
-  
+      printHTMLContent(`<style>${combinedStyles}</style>${processedContent}`, filename, combinedStyles);
     } catch (error) {
-      console.error('Error generating PDF:', error);
-      alert('Failed to generate PDF. Please try again.');
-    } finally {
-      document.body.removeChild(element); // Clean up
+       console.error('Error generating print preview:', error);
+      alert('Failed to open print preview. Please try again.');
     }
   };
   
