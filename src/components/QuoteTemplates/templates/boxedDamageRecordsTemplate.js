@@ -340,7 +340,7 @@ export const boxedDamageRecordsTemplate = {
 </head>
 <body>
   <!-- Cover Page -->
-  <div class="cover-page">
+  <div class="page cover-page">
     <div class="cover-header">
       <div class="cover-header-accent"></div>
     </div>
@@ -361,6 +361,7 @@ export const boxedDamageRecordsTemplate = {
   </div>
 
   <!-- Report Content -->
+  <div class="page">
   <div class="header">
     <img src="/assets/images/logo1.png" alt="Company Logo">
     <h1>Rack Audit Report</h1>
@@ -526,8 +527,8 @@ export const boxedDamageRecordsTemplate = {
       <li>Australian Standard AS 4084.1.2023 & AS 4084.2.2023</li>
       <li>Australian Standard AS 4084.2012</li>
       <li>Australian Standard AS 4084.1993</li>
-    </ul>
-  </div>
+    </div>
+  </div> <!-- end page -->
 </body>
 </html>`
 };
