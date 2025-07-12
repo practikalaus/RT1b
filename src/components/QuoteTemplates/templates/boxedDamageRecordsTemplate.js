@@ -5,6 +5,13 @@ export const boxedDamageRecordsTemplate = {
 <head>
   <meta charset="UTF-8">
   <style>
+   .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      page-break-after: always;
+    }
+
     /* Cover page styles */
     .cover-page {
       position: relative;
