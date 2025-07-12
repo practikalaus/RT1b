@@ -5,13 +5,26 @@ export const boxedDamageRecordsTemplate = {
 <head>
   <meta charset="UTF-8">
   <style>
+   @page {
+      size: A4;
+      margin: 20mm;
+    }
+
    .page {
       width: 210mm;
       min-height: 297mm;
       margin: 0 auto;
       page-break-after: always;
+    position: relative;
     }
 
+    .page-footer {
+      position: absolute;
+      bottom: 10mm;
+      right: 10mm;
+      font-size: 12px;
+    }
+    
     /* Cover page styles */
     .cover-page {
       position: relative;
@@ -290,9 +303,10 @@ export const boxedDamageRecordsTemplate = {
     }
 
     @media print {
-      body { 
+      body {
         margin: 0;
         padding: 20mm;
+        counter-reset: page;
       }
 
       .cover-page {
@@ -335,6 +349,11 @@ export const boxedDamageRecordsTemplate = {
       .closing-section {
         break-inside: avoid;
       }
+    
+      .page-number::after {
+        counter-increment: page;
+        content: "Page " counter(page);
+      }
     }
   </style>
 </head>
@@ -353,11 +372,12 @@ export const boxedDamageRecordsTemplate = {
     </div>
     <div class="cover-footer">
       <div class="cover-contact">
-        6 Renewable Chase Bibra Lake WA 6163 | 9410 9400 | 
-        <a href="mailto:sales@dmd.com.au">sales@dmd.com.au</a> | 
+        6 Renewable Chase Bibra Lake WA 6163 | 9410 9400 |
+        <a href="mailto:sales@dmd.com.au">sales@dmd.com.au</a> |
         <a href="https://dmd.com.au">dmd.com.au</a>
       </div>
     </div>
+    <div class="page-footer"><span class="page-number"></span></div>
   </div>
 
   <!-- Report Content -->
@@ -528,6 +548,7 @@ export const boxedDamageRecordsTemplate = {
       <li>Australian Standard AS 4084.2012</li>
       <li>Australian Standard AS 4084.1993</li>
     </div>
+    <div class="page-footer"><span class="page-number"></span></div>
   </div> <!-- end page -->
 </body>
 </html>`
