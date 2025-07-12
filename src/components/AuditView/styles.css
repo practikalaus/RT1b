@@ -226,4 +226,17 @@
   .no-print {
     display: none;
   }
+
+  .print-preview {
+    position: static;
+    background: transparent;
+    padding: 0;
+  }
+
+  .preview-container {
+    height: auto;
+    overflow: visible;
+    box-shadow: none;
+    border: none;
+  }
 }
