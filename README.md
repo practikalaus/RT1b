@@ -48,3 +48,16 @@ export default tseslint.config({
   },
 })
 ```
+
+
+## Environment Variables
+
+The application requires access to Supabase. Set the following variables in your
+environment before running the app:
+
+```bash
+VITE_SUPABASE_URL=<your-supabase-url>
+VITE_SUPABASE_ANON_KEY=<your-supabase-anon-key>
+```
+
+You can place them in a `.env` file at the project root during development.
