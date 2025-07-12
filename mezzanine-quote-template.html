@@ -62,6 +62,17 @@
       margin-top: 40px;
       padding-top: 8px;
     }
+    .page {
+      width: 210mm;
+      height: 297mm;
+      page-break-after: always;
+      border: 1px solid #ccc;
+      margin: 0 auto;
+    }
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
     @media print {
       body { margin: 0; padding: 20px; }
       .header h1 { color: #2563eb !important; }
@@ -70,6 +81,7 @@
   </style>
 </head>
 <body>
+  <div class="page">
   <div class="header">
     <h1>Mezzanine Floor Quotation</h1>
     <div class="reference">
@@ -176,6 +188,7 @@
         Date: _________________
       </div>
     </div>
+  </div>
   </div>
 </body>
 </html>
