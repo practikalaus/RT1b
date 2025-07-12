@@ -6,7 +6,7 @@ import './styles.css';
 import { useSettings } from '../../contexts/SettingsContext';
 import { boxedDamageRecordsTemplate } from '../QuoteTemplates/templates/boxedDamageRecordsTemplate';
 import { imageToBase64 } from '../../utils/assetPaths';
-import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType } from 'docx';
+import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, ImageRun, HeadingLevel } from 'docx';
 import { saveAs } from 'file-saver';
 
 const PrintableAudit = ({ audit, damageRecords, onClose, auditorDetails }) => {
@@ -261,85 +261,167 @@ const PrintableAudit = ({ audit, damageRecords, onClose, auditorDetails }) => {
     const filename = `${formattedDate}-${audit.company_name.replace(/[^a-zA-Z0-9]/g, '')}.docx`;
 
     try {
-      const doc = new Document({
-        sections: [{
-          properties: {},
+      const children = [
+        new Paragraph({
           children: [
-            new Paragraph({
-              children: [
-                new TextRun({
-                  text: "Rack Audit Report",
-                  bold: true,
-                  size: 36,
-                  font: "Calibri",
-                }),
-              ],
-              spacing: {
-                after: 400,
-              },
-            }),
-            new Paragraph({
-              children: [
-                new TextRun(`Reference: ${audit.reference_number}`),
-                new TextRun({
-                  text: `Date: ${new Date(audit.audit_date).toLocaleDateString()}`,
-                  break: 1,
-                }),
-                new TextRun({
-                  text: `Auditor: ${audit.auditor_name}`,
-                  break: 1,
-                }),
-                auditorDetails?.email ? new TextRun({ text: `Email: ${auditorDetails.email}`, break: 1 }) : undefined,
-                auditorDetails?.phone ? new TextRun({ text: `Phone: ${auditorDetails.phone}`, break: 1 }) : undefined,
-              ].filter(Boolean),
-              spacing: {
-                after: 200,
-              },
-            }),
-            new Paragraph({
-              children: [
-                new TextRun({
-                  text: "Site Information",
-                  bold: true,
-                  size: 28,
-                  font: 'Calibri'
-                }),
-              ],
-              spacing: {
-                after: 200,
-              },
-            }),
-            new Table({
-              rows: [
-                new TableRow({
-                  children: [
-                    new TableCell({
-                      children: [new Paragraph("Site Name")],
-                      width: { size: 30, type: WidthType.PERCENTAGE },
-                    }),
-                    new TableCell({
-                      children: [new Paragraph(audit.site_name)],
-                    }),
-                  ],
-                }),
-                new TableRow({
-                  children: [
-                    new TableCell({
-                      children: [new Paragraph("Company")],
-                    }),
-                    new TableCell({
-                      children: [new Paragraph(audit.company_name)],
-                    }),
-                  ],
-                }),
-              ],
-              width: {
-                size: 100,
-                type: WidthType.PERCENTAGE,
-              },
+            new TextRun({
+              text: "Rack Audit Report",
+              bold: true,
+              size: 36,
+              font: "Calibri",
             }),
           ],
-        }],
+          spacing: {
+            after: 400,
+          },
+        }),
+        new Paragraph({
+          children: [
+            new TextRun(`Reference: ${audit.reference_number}`),
+            new TextRun({
+              text: `Date: ${new Date(audit.audit_date).toLocaleDateString()}`,
+              break: 1,
+            }),
+            new TextRun({
+              text: `Auditor: ${audit.auditor_name}`,
+              break: 1,
+            }),
+            auditorDetails?.email ? new TextRun({ text: `Email: ${auditorDetails.email}`, break: 1 }) : undefined,
+            auditorDetails?.phone ? new TextRun({ text: `Phone: ${auditorDetails.phone}`, break: 1 }) : undefined,
+          ].filter(Boolean),
+          spacing: {
+            after: 200,
+          },
+        }),
+        new Paragraph({
+          children: [
+            new TextRun({
+              text: "Site Information",
+              bold: true,
+              size: 28,
+              font: 'Calibri'
+            }),
+          ],
+          spacing: {
+            after: 200,
+          },
+        }),
+        new Table({
+          rows: [
+            new TableRow({
+              children: [
+                new TableCell({
+                  children: [new Paragraph("Site Name")],
+                  width: { size: 30, type: WidthType.PERCENTAGE },
+                }),
+                new TableCell({
+                  children: [new Paragraph(audit.site_name)],
+                }),
+              ],
+            }),
+            new TableRow({
+              children: [
+                new TableCell({
+                  children: [new Paragraph("Company")],
+                }),
+                new TableCell({
+                  children: [new Paragraph(audit.company_name)],
+                }),
+              ],
+            }),
+          ],
+          width: {
+            size: 100,
+            type: WidthType.PERCENTAGE,
+          },
+        }),
+      ];
+
+      for (const record of damageRecords) {
+        children.push(
+          new Paragraph({
+            text: `${record.damage_type} - ${record.risk_level}`,
+            heading: HeadingLevel.HEADING_2,
+            spacing: { after: 200 },
+          })
+        );
+
+        const rows = [
+          new TableRow({
+            children: [
+              new TableCell({ children: [new Paragraph("Location")] }),
+              new TableCell({ children: [new Paragraph(record.location_details)] }),
+            ],
+          }),
+        ];
+
+        if (record.building_area) {
+          rows.push(
+            new TableRow({
+              children: [
+                new TableCell({ children: [new Paragraph("Building Area")] }),
+                new TableCell({ children: [new Paragraph(record.building_area)] }),
+              ],
+            })
+          );
+        }
+
+        rows.push(
+          new TableRow({
+            children: [
+              new TableCell({ children: [new Paragraph("Recommendation")] }),
+              new TableCell({ children: [new Paragraph(record.recommendation)] }),
+            ],
+          })
+        );
+
+        if (record.notes) {
+          rows.push(
+            new TableRow({
+              children: [
+                new TableCell({ children: [new Paragraph("Notes")] }),
+                new TableCell({ children: [new Paragraph(record.notes)] }),
+              ],
+            })
+          );
+        }
+
+        children.push(
+          new Table({
+            rows,
+            width: { size: 100, type: WidthType.PERCENTAGE },
+          })
+        );
+
+        if (record.photo_url) {
+          try {
+            const base64 = await imageToBase64(record.photo_url);
+            if (base64) {
+              children.push(
+                new Paragraph({
+                  children: [
+                    new ImageRun({
+                      data: base64,
+                      transformation: { width: 300, height: 225 },
+                    }),
+                  ],
+                  spacing: { after: 200 },
+                })
+              );
+            }
+          } catch (err) {
+            console.error('Error embedding image:', err);
+          }
+        }
+      }
+
+      const doc = new Document({
+        sections: [
+          {
+            properties: {},
+            children,
+          },
+        ],
       });
 
       const blob = await Packer.toBlob(doc);
