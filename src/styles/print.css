@@ -9,6 +9,14 @@
   margin: 0 auto 10mm;
   page-break-after: always;
   background: white;
+  position: relative;
+}
+
+.page-footer {
+  position: absolute;
+  bottom: 10mm;
+  right: 10mm;
+  font-size: 12px;
 }
 
 @media screen {
@@ -18,6 +26,9 @@
 }
 
 @media print {
+  body {
+    counter-reset: page;
+  }
   body * {
     visibility: hidden;
   }
@@ -63,5 +74,10 @@
 
   .signatures div {
     width: 45%;
+  }
+
+  .page-number::after {
+    counter-increment: page;
+    content: "Page " counter(page);
   }
 }
